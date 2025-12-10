@@ -1,0 +1,1973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survival Kit Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #2d4a3e 0%, #1a2f25 100%);
+            color: #e8f5e9;
+            min-height: 100vh;
+            padding: 1%;
+        }
+        
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: rgba(0, 0, 0, 0.4);
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 1%;
+            margin-bottom: 1%;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(76, 175, 80, 0.3);
+        }
+        
+        h1 {
+            font-size: 1.2em;
+            color: #76ff03;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 0.7em;
+            color: #a5d6a7;
+            margin-top: 1%;
+        }
+        
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1%;
+            margin-bottom: 1%;
+        }
+        
+        .warning {
+            background: rgba(244, 67, 54, 0.1);
+            border-left: 3px solid #f44336;
+            padding: 2%;
+            margin-top: 1%;
+            font-size: 0.75em;
+            border-radius: 4px;
+        }
+        
+        .warning-icon {
+            color: #f44336;
+            font-weight: bold;
+        }
+        
+        .checklist {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2%;
+            margin-top: 1%;
+            border-radius: 4px;
+        }
+        
+        .checklist-item {
+            font-size: 0.75em;
+            color: #c8e6c9;
+            padding: 1%;
+            margin-bottom: 1%;
+        }
+        
+        .category-btn {
+            background: linear-gradient(145deg, #3d5a4a, #2d4a3a);
+            border: 2px solid #66bb6a;
+            border-radius: 8px;
+            padding: 4%;
+            color: #c8e6c9;
+            font-size: 0.85em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .category-btn:active {
+            transform: scale(0.95);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .category-btn.active {
+            background: linear-gradient(145deg, #66bb6a, #4caf50);
+            border-color: #76ff03;
+            color: #1b5e20;
+            box-shadow: 0 0 15px rgba(76, 175, 80, 0.6);
+        }
+        
+        .content-area {
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid #4caf50;
+            border-radius: 8px;
+            padding: 1%;
+            min-height: 400px;
+        }
+        
+        .guide-section {
+            display: none;
+        }
+        
+        .guide-section.active {
+            display: block;
+            animation: fadeIn 0.4s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .guide-title {
+            font-size: 1em;
+            color: #76ff03;
+            margin-bottom: 1%;
+            padding-bottom: 1%;
+            border-bottom: 2px solid #4caf50;
+        }
+        
+        .item {
+            background: rgba(255, 255, 255, 0.05);
+            border-left: 3px solid #66bb6a;
+            padding: 2%;
+            margin-bottom: 1%;
+            border-radius: 4px;
+        }
+        
+        .item-title {
+            font-size: 0.9em;
+            color: #a5d6a7;
+            font-weight: bold;
+            margin-bottom: 1%;
+        }
+        
+        .item-desc {
+            font-size: 0.75em;
+            color: #c8e6c9;
+            line-height: 1.5;
+        }
+        
+        .priority {
+            display: inline-block;
+            padding: 1% 2%;
+            border-radius: 4px;
+            font-size: 0.65em;
+            font-weight: bold;
+            margin-bottom: 1%;
+        }
+        
+        .high { background: #c62828; color: white; }
+        .medium { background: #f57c00; color: white; }
+        .low { background: #2e7d32; color: white; }
+        
+        .tip {
+            background: rgba(255, 193, 7, 0.1);
+            border-left: 3px solid #ffc107;
+            padding: 2%;
+            margin-top: 1%;
+            font-size: 0.75em;
+            border-radius: 4px;
+        }
+        
+        .tip-icon {
+            color: #ffc107;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎒 Survival Kit Guide</h1>
+            <div class="subtitle">Essential Knowledge for Beginners</div>
+        </header>
+        
+        <div class="categories">
+            <button class="category-btn active" onclick="showGuide('essentials')">Core Essentials</button>
+            <button class="category-btn" onclick="showGuide('water')">Water & Food</button>
+            <button class="category-btn" onclick="showGuide('shelter')">Shelter & Fire</button>
+            <button class="category-btn" onclick="showGuide('medical')">First Aid</button>
+            <button class="category-btn" onclick="showGuide('tools')">Tools & Gear</button>
+            <button class="category-btn" onclick="showGuide('navigation')">Navigation</button>
+            <button class="category-btn" onclick="showGuide('signals')">Emergency Signals</button>
+            <button class="category-btn" onclick="showGuide('clothing')">Clothing & Gear</button>
+            <button class="category-btn" onclick="showGuide('wildlife')">Wildlife Safety</button>
+            <button class="category-btn" onclick="showGuide('weather')">Weather & Climate</button>
+            <button class="category-btn" onclick="showGuide('knots')">Knots & Cordage</button>
+            <button class="category-btn" onclick="showGuide('foraging')">Food & Foraging</button>
+            <button class="category-btn" onclick="showGuide('psychology')">Mental Survival</button>
+            <button class="category-btn" onclick="showGuide('urban')">Urban Survival</button>
+            <button class="category-btn" onclick="showGuide('hunting')">Hunting & Tracking</button>
+            <button class="category-btn" onclick="showGuide('plants')">Medicinal Plants</button>
+            <button class="category-btn" onclick="showGuide('vehicle')">Vehicle Survival</button>
+            <button class="category-btn" onclick="showGuide('winter')">Winter Survival</button>
+            <button class="category-btn" onclick="showGuide('desert')">Desert Survival</button>
+            <button class="category-btn" onclick="showGuide('tropical')">Jungle/Tropical</button>
+            <button class="category-btn" onclick="showGuide('coastal')">Coastal & Water</button>
+            <button class="category-btn" onclick="showGuide('mountain')">Mountain Terrain</button>
+        </div>
+        
+        <div class="content-area">
+            <div id="essentials" class="guide-section active">
+                <h2 class="guide-title">Core Survival Essentials</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🔥 Fire Starting Kit</div>
+                    <div class="item-desc">Waterproof matches, lighter, and ferro rod. Fire provides warmth, purifies water, cooks food, and signals for help.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">💧 Water Container</div>
+                    <div class="item-desc">Metal bottle or canteen that can hold at least 1 liter. Metal allows you to boil water for purification.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🔦 Light Source</div>
+                    <div class="item-desc">LED flashlight with extra batteries or hand-crank option. Essential for navigation and signaling at night.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">📻 Emergency Radio</div>
+                    <div class="item-desc">Battery or hand-crank radio for weather alerts and emergency broadcasts.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">📄 Important Documents</div>
+                    <div class="item-desc">Copies of ID, insurance, medical records in waterproof bag. Include emergency contacts, account numbers. USB drive with digital copies.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">💰 Cash Reserve</div>
+                    <div class="item-desc">Small bills ($1, $5, $10) for purchases when cards don't work. Include coins for pay phones, vending machines. $200-500 minimum recommended.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🔋 Power Bank</div>
+                    <div class="item-desc">20,000+ mAh portable charger, keep fully charged. Solar panel charger as backup. Multiple charging cables for different devices.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> Remember the Rule of Threes: 3 minutes without air, 3 hours without shelter in harsh conditions, 3 days without water, 3 weeks without food.
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Always tell someone your plans before heading outdoors. Leave detailed itinerary with expected return time.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Pre-Trip Checklist:</div>
+                    <div class="checklist-item">✓ Check weather forecast for destination</div>
+                    <div class="checklist-item">✓ Test all equipment before departure</div>
+                    <div class="checklist-item">✓ Pack extra batteries and backup power</div>
+                    <div class="checklist-item">✓ Bring photocopies of important documents</div>
+                    <div class="checklist-item">✓ Update emergency contacts with trip details</div>
+                    <div class="checklist-item">✓ Review first aid procedures and CPR</div>
+                    <div class="checklist-item">✓ Pack according to climate/terrain</div>
+                    <div class="checklist-item">✓ Verify communication devices charged</div>
+                    <div class="checklist-item">✓ Know local emergency numbers</div>
+                </div>
+            </div>
+            
+            <div id="water" class="guide-section">
+                <h2 class="guide-title">Water & Food Supplies</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">💊 Water Purification</div>
+                    <div class="item-desc">Tablets, drops, or portable filter. Never drink untreated water from natural sources. Boiling for 1 minute is most reliable.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🥫 Non-Perishable Food</div>
+                    <div class="item-desc">Energy bars, dried fruits, nuts, and canned goods. Pack at least 72 hours worth of calories (2000+ per day).</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🎣 Fishing Line & Hooks</div>
+                    <div class="item-desc">Compact fishing kit for catching food. Even basic supplies can provide protein in wilderness survival.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🍵 Metal Cup/Pot</div>
+                    <div class="item-desc">For boiling water and cooking. Stainless steel is lightweight and durable.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🧂 Salt & Seasonings</div>
+                    <div class="item-desc">Salt helps preserve food and maintain electrolytes. Small containers of spices improve morale with better-tasting meals.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🍫 Emergency Rations</div>
+                    <div class="item-desc">High-calorie survival bars or MREs. Can last 5+ years. Each bar provides 400+ calories.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🥤 Electrolyte Balance</div>
+                    <div class="item-desc">Powder packets for hydration. Critical in heat, diarrhea, vomiting. DIY: 6 tsp sugar, 1/2 tsp salt per liter water. Prevents dangerous electrolyte loss.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">☕ Energy Foods</div>
+                    <div class="item-desc">Instant coffee/tea for morale, warmth. Honey never spoils, instant energy. Peanut butter high protein/fat. Hard candies boost morale, provide quick sugar.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> Look for water near valleys, green vegetation, and animal tracks. Morning dew can be collected with cloth. Never ration water if you have it—drink what you need.
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Avoid water with foam, strange odors, or dead animals nearby. Clear water isn't always safe—always purify.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Water Purification Methods:</div>
+                    <div class="checklist-item">✓ Boiling: 1 min at sea level, 3 min above 6,500ft</div>
+                    <div class="checklist-item">✓ Tablets: Follow package directions, wait 30+ min</div>
+                    <div class="checklist-item">✓ UV Light: Stir water while exposing for 90 sec</div>
+                    <div class="checklist-item">✓ Filter: Clean filter regularly, test flow rate</div>
+                    <div class="checklist-item">✓ Solar: Clear bottle in sun for 6+ hours kills bacteria</div>
+                    <div class="checklist-item">✓ Cloth Filter: Pre-filter debris (not purification)</div>
+                    <div class="checklist-item">✓ Charcoal: Activated carbon removes some chemicals</div>
+                    <div class="checklist-item">✓ Emergency: Bleach (2 drops per quart, wait 30min)</div>
+                </div>
+            </div>
+            
+            <div id="shelter" class="guide-section">
+                <h2 class="guide-title">Shelter & Fire Building</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🏕️ Emergency Blanket</div>
+                    <div class="item-desc">Mylar thermal blanket reflects body heat and is waterproof. Can also signal aircraft with reflective surface.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🪢 Paracord (50ft)</div>
+                    <div class="item-desc">550 paracord has multiple uses: building shelter, making traps, fishing line, and emergency repairs.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🎪 Tarp or Poncho</div>
+                    <div class="item-desc">Waterproof covering for shelter construction. Can be worn as rain gear or used as ground cover.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🔥 Fire Tinder</div>
+                    <div class="item-desc">Dryer lint, cotton balls with petroleum jelly, or commercial fire starters. Keeps moisture-free in waterproof bag.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">⛺ Sleeping Bag</div>
+                    <div class="item-desc">Temperature-rated for your climate. Mummy-style retains heat better. Keep dry at all costs.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🛏️ Sleeping Pad</div>
+                    <div class="item-desc">Insulates from cold ground. Inflatable or foam. Ground steals body heat faster than air.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🪨 Rock Heat Storage</div>
+                    <div class="item-desc">Heat rocks in fire, place in shelter for warmth (NOT river rocks - explode). Test temperature first. Wrap in fabric. Reheats all night. Avoid shale/porous rocks.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🌲 Natural Insulation</div>
+                    <div class="item-desc">Pine needles, leaves, grass for bedding (12+ inches thick). Creates air pockets. Stuff inside clothing for warmth. Change daily if damp. Debris hut principle.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> Build shelter before dark. Look for natural windbreaks. Keep fire triangle in mind: heat, fuel, oxygen. Build fires in safe cleared areas away from overhanging branches.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Fire Building Steps:</div>
+                    <div class="checklist-item">1. Gather tinder (dry grass, bark, paper)</div>
+                    <div class="checklist-item">2. Collect kindling (small twigs, pencil-size)</div>
+                    <div class="checklist-item">3. Prepare fuel wood (arm-thick branches)</div>
+                    <div class="checklist-item">4. Build structure (teepee or log cabin style)</div>
+                    <div class="checklist-item">5. Light tinder, shield from wind</div>
+                    <div class="checklist-item">6. Gradually add kindling, then fuel wood</div>
+                    <div class="checklist-item">7. Maintain with dry wood, monitor constantly</div>
+                    <div class="checklist-item">8. Build reflector wall to direct heat</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Never leave fire unattended. Clear 10ft radius of debris. Keep water nearby. Fully extinguish before sleeping or leaving.
+                </div>
+            </div>
+            
+            <div id="medical" class="guide-section">
+                <h2 class="guide-title">First Aid Essentials</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🩹 Bandages & Gauze</div>
+                    <div class="item-desc">Assorted adhesive bandages, sterile gauze pads, and medical tape for wound care.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">💊 Basic Medications</div>
+                    <div class="item-desc">Pain relievers, antihistamines, anti-diarrhea medication, and any personal prescriptions.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🧴 Antiseptic</div>
+                    <div class="item-desc">Alcohol wipes, antiseptic cream, and hand sanitizer to prevent infection.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">✂️ Trauma Supplies</div>
+                    <div class="item-desc">Scissors, tweezers, safety pins, and a tourniquet for serious injuries.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🧊 Cold/Heat Packs</div>
+                    <div class="item-desc">Instant cold packs for sprains, swelling. Heat packs for hypothermia, muscle pain.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">📋 Medical Manual</div>
+                    <div class="item-desc">Pocket first aid guide. Critical when no signal for internet. Covers CPR, fractures, bites.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">💉 Specialized Supplies</div>
+                    <div class="item-desc">EpiPen for allergies, glucose tablets for diabetics, inhaler for asthma. Pack personal medical needs with expiration tracking.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🧼 Hygiene Supplies</div>
+                    <div class="item-desc">Soap, toothbrush, toilet paper, feminine products. Clean hands prevent infection. Maintaining hygiene boosts morale and health.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🩺 CPR Knowledge</div>
+                    <div class="item-desc">30 chest compressions, 2 rescue breaths. Push hard (2 inches), fast (100-120/min). Continue until help arrives or victim breathes. AED instructions if available.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🦟 Insect Bite Treatment</div>
+                    <div class="item-desc">Remove stinger (scrape, don't pinch). Clean area, ice for swelling. Baking soda paste reduces itching. Watch for allergic reactions. Tick removal: tweezers, pull straight up.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> Clean wounds immediately with clean water. Apply pressure to stop bleeding. Change bandages daily. Learn basic CPR and the Heimlich maneuver before emergencies occur.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Treating Common Injuries:</div>
+                    <div class="checklist-item">• Cuts: Clean, apply pressure, elevate, bandage</div>
+                    <div class="checklist-item">• Burns: Cool with water 10-20min, don't pop blisters</div>
+                    <div class="checklist-item">• Sprains: Rest, Ice, Compress, Elevate (RICE)</div>
+                    <div class="checklist-item">• Fractures: Immobilize, don't realign, seek help</div>
+                    <div class="checklist-item">• Hypothermia: Remove wet clothes, warm gradually</div>
+                    <div class="checklist-item">• Dehydration: Sip water slowly, add electrolytes</div>
+                    <div class="checklist-item">• Blisters: Don't pop, cover with moleskin/bandage</div>
+                    <div class="checklist-item">• Nosebleed: Lean forward, pinch soft part 10min</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Shock can kill. Keep victim warm, calm, lying down with legs elevated. Never give unconscious person anything to drink.
+                </div>
+            </div>
+            
+            <div id="tools" class="guide-section">
+                <h2 class="guide-title">Tools & Equipment</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🔪 Fixed Blade Knife</div>
+                    <div class="item-desc">4-6 inch full tang blade. Most important tool for processing wood, food prep, and making tools.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🪓 Multi-Tool</div>
+                    <div class="item-desc">Pliers, wire cutters, screwdrivers, and saw blade in compact package. Choose quality brands.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🧰 Duct Tape</div>
+                    <div class="item-desc">Wrap around water bottle or stick. Repairs gear, creates waterproof seals, makes bandages, and more.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">📱 Whistle</div>
+                    <div class="item-desc">Loud emergency whistle for signaling. Three blasts is universal distress signal. Carries farther than voice.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🪡 Sewing Kit</div>
+                    <div class="item-desc">Thread, needles, buttons. Repair torn clothing and gear. Can suture wounds in extreme emergency.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">⚡ Saw/Axe</div>
+                    <div class="item-desc">Folding saw or hatchet for processing firewood. Saw is safer and lighter than axe for beginners.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🔦 Headlamp</div>
+                    <div class="item-desc">Hands-free lighting essential for tasks. Red light mode preserves night vision. Waterproof rated. Keep extra batteries in different location.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🧰 Emergency Tools</div>
+                    <div class="item-desc">P-38 can opener (military style), safety pins, zip ties, wire. Small items with huge utility. Store in accessible pocket.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🔍 Magnifying Glass</div>
+                    <div class="item-desc">Fire starting on sunny days. Inspect wounds/splinters. Read small text. Signal device (reflect sunlight). Weighs almost nothing.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🧵 Repair Materials</div>
+                    <div class="item-desc">Duct tape (wrap on stick to save space). Safety pins multiple sizes. Super glue for quick repairs. Patch fabric. These fix gear and can close wounds in emergency.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🔧 Survival Saw</div>
+                    <div class="item-desc">Wire saw (flexible, lightweight) or folding saw. Cut firewood, construct shelter. Quieter than axe. Less injury risk than hatchet. Essential for wood processing.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> Keep knife sharp—dull knives are dangerous. Learn proper cutting techniques away from body. Always have backup tools for critical functions.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Essential Tool Skills:</div>
+                    <div class="checklist-item">• Knife: Always cut away from body, keep sharp</div>
+                    <div class="checklist-item">• Rope: Learn bowline, clove hitch, taut-line knots</div>
+                    <div class="checklist-item">• Multi-tool: Oil moving parts, dry after use</div>
+                    <div class="checklist-item">• Saw: Use long strokes, let tool do the work</div>
+                    <div class="checklist-item">• Sharpening: 20-degree angle, consistent strokes</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Dull tools are dangerous - require more force and slip easily. Sharpen regularly. Store tools dry to prevent rust. Never throw tools to others.
+                </div>
+            </div>
+            
+            <div id="navigation" class="guide-section">
+                <h2 class="guide-title">Navigation & Signaling</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🧭 Compass</div>
+                    <div class="item-desc">Liquid-filled baseplate compass with declination adjustment. Works without batteries or satellites.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🗺️ Local Maps</div>
+                    <div class="item-desc">Waterproof topographic maps of your area. Mark water sources, shelters, and evacuation routes.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🔦 Signal Mirror</div>
+                    <div class="item-desc">Can be seen from aircraft up to 10 miles away. Flash in groups of three for SOS.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🎆 Flares</div>
+                    <div class="item-desc">Road flares or emergency flares for nighttime signaling. Store in waterproof container.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">📱 GPS Device</div>
+                    <div class="item-desc">Handheld GPS or smartphone with offline maps. Mark waypoints. Always carry backup power.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">✏️ Pencil & Waterproof Notebook</div>
+                    <div class="item-desc">Record coordinates, trail markers, important info. Pencil works when wet, won't freeze or run out.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> Learn to read sun position (rises east, sets west). Moss often grows on north side of trees in Northern Hemisphere. Stay put if lost—searchers will find you easier.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Natural Navigation Tips:</div>
+                    <div class="checklist-item">• Sun: East at sunrise, south at noon (N. Hemisphere)</div>
+                    <div class="checklist-item">• Stars: North Star points north, find Big Dipper</div>
+                    <div class="checklist-item">• Moon: Crescent tips point north (N. Hemisphere)</div>
+                    <div class="checklist-item">• Stick Shadow: Mark shadow tip every 15min for E-W</div>
+                    <div class="checklist-item">• Landmarks: Note prominent features, triangulate</div>
+                    <div class="checklist-item">• Watch Method: Hour hand to sun, halfway to 12 = south</div>
+                    <div class="checklist-item">• Ant Hills: Often face south (N. Hemisphere)</div>
+                    <div class="checklist-item">• Tree Growth: Denser on south side (generally)</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> If lost, STOP - Sit, Think, Observe, Plan. Don't panic. Stay where you are unless in immediate danger. Make yourself visible.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Map Reading Basics:</div>
+                    <div class="checklist-item">• Contour lines close together = steep terrain</div>
+                    <div class="checklist-item">• V-shapes pointing uphill = valley/stream</div>
+                    <div class="checklist-item">• Blue = water features (rivers, lakes)</div>
+                    <div class="checklist-item">• Green = vegetation (forests, swamps)</div>
+                    <div class="checklist-item">• Magnetic declination: adjust compass for area</div>
+                    <div class="checklist-item">• Scale: 1:24,000 common (1 inch = 2,000 feet)</div>
+                </div>
+            </div>
+            
+            <div id="signals" class="guide-section">
+                <h2 class="guide-title">Emergency Signals & Communication</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">📢 SOS Signal</div>
+                    <div class="item-desc">Universal distress: 3 short, 3 long, 3 short (... --- ...). Use whistle, light, smoke, or sound. Repeat every minute.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🔥 Signal Fire</div>
+                    <div class="item-desc">Three fires in triangle (100ft apart) or straight line. Add green branches for white smoke during day.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">✈️ Ground-to-Air Signals</div>
+                    <div class="item-desc">Make large symbols with rocks/logs. "X" = need help, "I" = need medical, "F" = need food/water, "→" = going this way.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">📱 Cell Phone Tips</div>
+                    <div class="item-desc">Text uses less battery than calls. Turn off when no signal. Climb high ground for better reception. Keep in airplane mode to save power.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🎨 Bright Markers</div>
+                    <div class="item-desc">Orange/red fabric, emergency blankets. Tie to trees, lay on ground. Contrasts with natural colors, visible from air.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">📢 Sound Signals</div>
+                    <div class="item-desc">Three of anything = SOS. Whistle: 3 blasts, rest, repeat. Banging pots, shouting. Sound travels far in valleys, gets absorbed in forest. Use regularly during day.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">💡 Light Signals</div>
+                    <div class="item-desc">Flashlight SOS: 3 short, 3 long, 3 short. Strobe mode if available. Visible for miles at night. Point at aircraft/vehicles. Save battery - signal only when needed.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> International ground signal: Wave both arms overhead in large, slow movements. One arm waving means "do not land/all okay."
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Signal Priority Order:</div>
+                    <div class="checklist-item">1. Mirror flash (daytime, clear weather)</div>
+                    <div class="checklist-item">2. Whistle blasts (3 in a row, 1 minute apart)</div>
+                    <div class="checklist-item">3. Signal fire with smoke (add green vegetation)</div>
+                    <div class="checklist-item">4. Flares (nighttime or poor visibility)</div>
+                    <div class="checklist-item">5. Ground markers (make large, 12ft+ symbols)</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Never fire gun into air for signal - dangerous and illegal in many areas. Use only approved signaling devices.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Making Yourself Findable:</div>
+                    <div class="checklist-item">• Stay in open areas, avoid dense forest</div>
+                    <div class="checklist-item">• Create contrast - bright colors vs surroundings</div>
+                    <div class="checklist-item">• Make noise regularly during day</div>
+                    <div class="checklist-item">• Leave trail markers if you must move</div>
+                    <div class="checklist-item">• Keep fire smoking during day (green leaves)</div>
+                    <div class="checklist-item">• Arrange rocks/logs into geometric patterns</div>
+                </div>
+            </div>
+            
+            <div id="clothing" class="guide-section">
+                <h2 class="guide-title">Clothing & Protective Gear</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">👕 Layering System</div>
+                    <div class="item-desc">Base layer (moisture-wicking), mid layer (insulation), outer layer (wind/waterproof). Remove layers before sweating.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">👢 Proper Footwear</div>
+                    <div class="item-desc">Waterproof boots with ankle support. Break in before trips. Bring extra socks (wool or synthetic, never cotton).</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🧢 Head Protection</div>
+                    <div class="item-desc">Wide-brim hat for sun, warm beanie for cold. 40% of body heat lost through head. Bandana has 20+ uses.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🧤 Hand Protection</div>
+                    <div class="item-desc">Work gloves for tasks, warm gloves for cold. Keep hands dry. Mittens warmer than gloves in extreme cold.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🕶️ Eye Protection</div>
+                    <div class="item-desc">Sunglasses with UV protection. Prevent snow blindness, glare. Safety glasses for wood processing.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🧥 Rain Gear</div>
+                    <div class="item-desc">Waterproof jacket and pants. Staying dry is critical. Hypothermia can occur even above 50°F if wet.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">👟 Spare Footwear</div>
+                    <div class="item-desc">Extra pair of shoes/boots. Foot injuries end mobility. Keep spare socks always dry. Alternate boots daily to air out. Treat blisters immediately.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🧣 Neck/Face Protection</div>
+                    <div class="item-desc">Bandana/buff: 20+ uses (mask, bandage, water filter, sling, tourniquet). Shemagh for desert. Balaclava for extreme cold. Protect face from sun, wind, cold.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> Cotton kills in cold weather - absorbs moisture, dries slowly. Choose wool or synthetic materials. "If it's cotton, it's rotten."
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Clothing Do's & Don'ts:</div>
+                    <div class="checklist-item">✓ DO wear moisture-wicking base layers</div>
+                    <div class="checklist-item">✓ DO dress in layers you can adjust</div>
+                    <div class="checklist-item">✓ DO keep extra clothes in waterproof bag</div>
+                    <div class="checklist-item">✗ DON'T wear cotton in cold/wet conditions</div>
+                    <div class="checklist-item">✗ DON'T overdress - you'll sweat and chill</div>
+                    <div class="checklist-item">✗ DON'T forget to protect extremities</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Hypothermia symptoms: shivering, confusion, slurred speech, drowsiness. Re-warm slowly. Remove wet clothes immediately.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Clothing Maintenance:</div>
+                    <div class="checklist-item">• Dry clothes by fire (not too close - melts synthetics)</div>
+                    <div class="checklist-item">• Repair tears immediately with duct tape/sewing kit</div>
+                    <div class="checklist-item">• Rotate socks daily, air out boots at night</div>
+                    <div class="checklist-item">• Shake out clothing before wearing (insects/debris)</div>
+                    <div class="checklist-item">• Store in waterproof bags when not wearing</div>
+                    <div class="checklist-item">• Use spare clothes as pillow/insulation at night</div>
+                </div>
+            </div>
+            
+            <div id="wildlife" class="guide-section">
+                <h2 class="guide-title">Wildlife Safety & Awareness</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🐻 Bear Encounters</div>
+                    <div class="item-desc">Make noise while hiking. If spotted: stay calm, don't run, appear large, back away slowly. Bear spray effective 30ft range.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🐍 Snake Safety</div>
+                    <div class="item-desc">Watch where you step/sit. Most bites occur when stepping on or handling snakes. If bitten: stay calm, immobilize limb, seek help immediately.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🦟 Insect Protection</div>
+                    <div class="item-desc">DEET or picaridin repellent. Tuck pants into socks. Check for ticks daily. Mosquitoes spread diseases - use netting in endemic areas.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🍖 Food Storage</div>
+                    <div class="item-desc">Hang food 12ft high, 6ft from trunk, 100+ yards from camp. Never sleep with food. Store toiletries with food - animals smell it all.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🦝 Small Animals</div>
+                    <div class="item-desc">Raccoons, squirrels carry diseases. Don't feed or approach. Secure all food and trash. Rabies risk - avoid all wildlife contact.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🕷️ Dangerous Insects</div>
+                    <div class="item-desc">Black widow, brown recluse spiders. Scorpions in desert. Check shoes/clothing before wearing. Shake out sleeping bag. Most active at night. Bites need medical attention.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🦅 Birds of Prey</div>
+                    <div class="item-desc">Rarely attack humans. If nesting: give wide berth. Cover head if swooping. Back away slowly. Don't look up directly. Most defend nest only, won't pursue.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> "If it's black, fight back. If it's brown, lie down. If it's white, goodnight." (Black bears: be aggressive. Grizzly: play dead. Polar: extremely dangerous.)
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Wildlife Encounter Protocol:</div>
+                    <div class="checklist-item">1. Stay calm, assess the situation</div>
+                    <div class="checklist-item">2. Never run - triggers chase instinct</div>
+                    <div class="checklist-item">3. Make yourself large, make noise</div>
+                    <div class="checklist-item">4. Back away slowly while facing animal</div>
+                    <div class="checklist-item">5. If attacked, fight back or play dead (species dependent)</div>
+                    <div class="checklist-item">6. Report all dangerous encounters to authorities</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Never approach wildlife, especially with young. Maintain 100+ yards from bears/wolves, 25+ yards from other large animals. Fed animals become dangerous.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Animal Behavior Indicators:</div>
+                    <div class="checklist-item">• Ears back, teeth showing = aggressive, back away</div>
+                    <div class="checklist-item">• Bluff charges (stops short) = testing you, stand ground</div>
+                    <div class="checklist-item">• Circling = predatory behavior, very dangerous</div>
+                    <div class="checklist-item">• Chattering/hissing = warning, respect space</div>
+                    <div class="checklist-item">• Fresh tracks/scat = animal nearby, increase caution</div>
+                    <div class="checklist-item">• Carcass remains = predator territory, leave area</div>
+                </div>
+            </div>
+            
+            <div id="weather" class="guide-section">
+                <h2 class="guide-title">Weather & Climate Awareness</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">⛈️ Storm Recognition</div>
+                    <div class="item-desc">Dark clouds, sudden wind change, temperature drop indicate storms. Seek shelter immediately. Lightning: count seconds between flash and thunder, divide by 5 for miles away.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">❄️ Cold Weather</div>
+                    <div class="item-desc">Wind chill can be deadly. Exposed skin freezes in minutes below 0°F. Layer clothing, stay dry, keep moving. Watch for frostbite on extremities.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">☀️ Heat Safety</div>
+                    <div class="item-desc">Heat exhaustion symptoms: heavy sweating, weakness, nausea. Heat stroke is life-threatening: hot dry skin, confusion, unconsciousness. Cool victim immediately.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🌊 Flash Floods</div>
+                    <div class="item-desc">Never camp in dry riverbeds or valleys. Water can rise within minutes from distant rain. Move to high ground immediately if flooding occurs.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🌫️ Fog & Visibility</div>
+                    <div class="item-desc">Reduce travel in poor visibility. Use compass, don't trust sense of direction. Mark trail, take frequent bearings. Sound carries differently in fog.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">💨 Wind Assessment</div>
+                    <div class="item-desc">Strong winds increase fire danger, hypothermia risk, make shelters difficult. Seek protected areas. Wind chill dramatically lowers effective temperature.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🌊 Water Level Awareness</div>
+                    <div class="item-desc">Flash floods from distant rain. Never camp in washes, valleys, low ground. Water rises in minutes. Move to high ground at first sign. Currents extremely dangerous.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">☁️ Cloud Formations</div>
+                    <div class="item-desc">Cirrus (wispy) = change coming. Cumulus (puffy) = fair weather. Cumulonimbus (towering dark) = thunderstorm imminent. Mammatus clouds = severe weather, take shelter immediately.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> Red sky at night = sailor's delight. Red sky at morning = sailor's warning. Ring around moon = rain within 24hrs. These old sayings have meteorological basis.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Reading Weather Signs:</div>
+                    <div class="checklist-item">• High thin clouds → weather changing in 24hrs</div>
+                    <div class="checklist-item">• Clouds lowering/darkening → rain approaching</div>
+                    <div class="checklist-item">• Wind from south/southeast → storm likely</div>
+                    <div class="checklist-item">• Pressure drop (headache/joint pain) → bad weather</div>
+                    <div class="checklist-item">• Animals seeking shelter → storm imminent</div>
+                    <div class="checklist-item">• Morning dew absent → rain possible</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Lightning: Get off peaks/ridges immediately. Avoid lone trees, water, metal. Crouch low on insulated pad if caught in open. If hair stands up, lightning about to strike - drop immediately.
+                </div>
+            </div>
+            
+            <div id="knots" class="guide-section">
+                <h2 class="guide-title">Essential Knots & Cordage</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🪢 Bowline Knot</div>
+                    <div class="item-desc">Creates fixed loop that won't slip. "Rabbit comes out of hole, around tree, back down hole." Essential for rescue, securing loads, climbing.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🔗 Square Knot</div>
+                    <div class="item-desc">Joins two ropes of equal diameter. "Right over left, left over right." NOT for climbing - can slip under load. Good for bandages, packages.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">⚓ Clove Hitch</div>
+                    <div class="item-desc">Quick way to attach rope to post/tree. Easy to adjust. Two half hitches around object. Perfect for starting lashings on shelters.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🎯 Taut-Line Hitch</div>
+                    <div class="item-desc">Adjustable loop, slides to tighten/loosen. Essential for tent guy-lines and adjustable anchor points. Grips under tension, slides when slack.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🔄 Sheet Bend</div>
+                    <div class="item-desc">Joins ropes of different diameters. Stronger than square knot. Double sheet bend for extra security on slippery rope or critical loads.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🎣 Improved Clinch</div>
+                    <div class="item-desc">Fishing knot for tying hook to line. 95% strength retention. Thread through eye 5-7 times, loop back through, tighten slowly.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🪢 Prussik Knot</div>
+                    <div class="item-desc">Friction hitch that grips when weighted, slides when not. Emergency ascending/descending rope. Use smaller diameter cord around larger rope.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> Practice knots at home until muscle memory develops. Wet rope before tightening critical knots. Always leave 6+ inch tail. Test every knot under load before trusting life to it.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Knot-Tying Best Practices:</div>
+                    <div class="checklist-item">✓ Learn 5 essential knots thoroughly vs 20 poorly</div>
+                    <div class="checklist-item">✓ Practice with eyes closed for night scenarios</div>
+                    <div class="checklist-item">✓ Inspect knots before and during use</div>
+                    <div class="checklist-item">✓ Use correct knot for task - wrong knot can kill</div>
+                    <div class="checklist-item">✓ Backup critical knots with additional half hitch</div>
+                    <div class="checklist-item">✓ Cut frayed or damaged rope - don't risk failure</div>
+                    <div class="checklist-item">✓ Wet rope before tightening for strength</div>
+                    <div class="checklist-item">✓ Leave 6+ inch tail on all knots</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Never use square knot for climbing or life support - it can slip. Bowline can work loose with repeated loading/unloading - use backup knot or stopper.
+                </div>
+            </div>
+            
+            <div id="foraging" class="guide-section">
+                <h2 class="guide-title">Food Sources & Foraging Safety</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🍄 Universal Edibility Test</div>
+                    <div class="item-desc">NEVER eat unknown plants/mushrooms without testing. Rub on skin (15min), lips (3min), tongue (15min), chew/spit (15min), swallow small amount (5hrs). If no reaction, eat small portion.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🐛 Insects as Protein</div>
+                    <div class="item-desc">Remove wings/legs, cook thoroughly. Avoid bright colors, hairy/spiny, strong smells. Grasshoppers, crickets, ants (remove head), grubs are safe. High protein, 6-leg insects generally safe.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🌿 Safe Wild Plants</div>
+                    <div class="item-desc">Dandelion (all parts), cattail (roots/shoots), clover, plantain, chickweed. Learn 5-10 local edibles thoroughly. Avoid milky sap (except dandelion), umbrella-shaped flowers, three-leafed plants.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🎣 Fishing Techniques</div>
+                    <div class="item-desc">Set multiple hooks on trot line. Fish at dawn/dusk. Look for structure (rocks, logs). Small fish for bait, catch bigger fish. Spear fish in shallow water by pinning to bottom.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🪤 Trapping Basics</div>
+                    <div class="item-desc">Simple snare: wire loop on game trail. Deadfall trap: heavy log triggered by bait stick. Check traps twice daily. Legal/ethical only in true survival situations.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🥜 Nuts & Seeds</div>
+                    <div class="item-desc">Acorns (boil to remove tannins), pine nuts, walnuts. High calorie, stores well. Crack open, inspect for mold/insects before eating.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🍇 Berries</div>
+                    <div class="item-desc">General rule: Blue/black usually safe, red maybe, white/yellow avoid. Aggregate berries (raspberry/blackberry) are safe. Single berry on stem often poisonous.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🦞 Aquatic Food</div>
+                    <div class="item-desc">Crayfish in streams (flip rocks). Frogs, turtles edible (cook thoroughly). Mussels/clams only from moving water. Avoid red tide periods. All require cooking to kill parasites.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🌾 Wild Grains</div>
+                    <div class="item-desc">Cattail roots, wild rice, amaranth. Labor intensive but high carbs. Grind or pound to make flour. Cook to improve digestibility. Learn local varieties before emergency.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> Calories from foraging often less than energy spent finding food. In short-term survival, existing fat reserves sustain you. Focus on water first, food secondary.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Foraging Safety Rules:</div>
+                    <div class="checklist-item">1. NEVER eat mushrooms unless 100% certain</div>
+                    <div class="checklist-item">2. Avoid plants with milky/colored sap</div>
+                    <div class="checklist-item">3. Skip plants with umbrella flower clusters</div>
+                    <div class="checklist-item">4. Don't eat anything with almond/bitter smell</div>
+                    <div class="checklist-item">5. Avoid three-leafed plants (often poison)</div>
+                    <div class="checklist-item">6. Cook all animal protein to kill parasites</div>
+                    <div class="checklist-item">7. Eat only small amounts of new foods first</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Starvation takes 3+ weeks. Poisoning takes hours. When in doubt, go without. One person should test new food, others wait 24hrs before eating.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Edible vs Poisonous Quick Check:</div>
+                    <div class="checklist-item">✓ SAFE: Aggregate berries (raspberry type)</div>
+                    <div class="checklist-item">✓ SAFE: Plants with square stems (mint family)</div>
+                    <div class="checklist-item">✓ SAFE: Single seed in middle (stone fruits)</div>
+                    <div class="checklist-item">✗ AVOID: White/yellow berries (95% poisonous)</div>
+                    <div class="checklist-item">✗ AVOID: Milky sap (except dandelion)</div>
+                    <div class="checklist-item">✗ AVOID: Umbrella-shaped flower clusters</div>
+                    <div class="checklist-item">✗ AVOID: Almond/bitter smell</div>
+                    <div class="checklist-item">✗ AVOID: Three-leafed plants</div>
+                </div>
+            </div>
+            
+            <div id="psychology" class="guide-section">
+                <h2 class="guide-title">Mental Survival & Psychology</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🧠 Survival Mindset</div>
+                    <div class="item-desc">Will to live is #1 factor. Positive mental attitude (PMA) essential. Think, plan, act. Focus on what you can control. Small victories build confidence.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">😰 Managing Panic</div>
+                    <div class="item-desc">STOP: Sit, Think, Observe, Plan. Deep breathing (4 count in, 4 hold, 4 out). Focus on immediate task, not entire situation. Panic wastes energy and causes mistakes.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🎯 Prioritization</div>
+                    <div class="item-desc">Survival priorities: Safety, Shelter, Water, Fire, Food, Rescue. Address immediate threats first. Break large problems into small, manageable tasks.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">💪 Maintaining Morale</div>
+                    <div class="item-desc">Keep busy with productive tasks. Maintain hygiene and routines. Talk to yourself positively. Recall happy memories. Humor helps - laugh when possible.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">😴 Sleep Management</div>
+                    <div class="item-desc">Rest critical for decision-making. Sleep when safe to do so. Exhaustion leads to poor judgment. Power naps (20min) restore alertness without grogginess.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">👥 Group Dynamics</div>
+                    <div class="item-desc">Assign roles, rotate leadership. Make decisions by consensus when possible. Address conflicts immediately. Lone survivors: talk aloud, stay connected to humanity.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">📝 Journaling</div>
+                    <div class="item-desc">Record events, thoughts, lessons learned. Organizes thinking, tracks progress. Useful for rescue debriefing. Provides mental outlet for stress.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> 10-80-10 Rule: 10% of people stay calm in crisis, 80% become confused/stunned, 10% panic. Training moves you to the 10% who act effectively.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Building Mental Resilience:</div>
+                    <div class="checklist-item">• Visualize success before attempting tasks</div>
+                    <div class="checklist-item">• Celebrate small wins - fire started, shelter built</div>
+                    <div class="checklist-item">• Maintain daily routines when possible</div>
+                    <div class="checklist-item">• Stay physically active - movement fights despair</div>
+                    <div class="checklist-item">• Think about loved ones - strong motivation</div>
+                    <div class="checklist-item">• Practice gratitude - focus on what you have</div>
+                    <div class="checklist-item">• Set short-term achievable goals daily</div>
+                    <div class="checklist-item">• Talk to yourself positively and out loud</div>
+                    <div class="checklist-item">• Sing songs, tell stories - maintain humanity</div>
+                    <div class="checklist-item">• Rest when needed - exhaustion clouds judgment</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Your mind is your most important survival tool.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">SURVIVAL Acronym:</div>
+                    <div class="checklist-item">S - Size up the situation (assess reality)</div>
+                    <div class="checklist-item">U - Undue haste makes waste (slow is smooth)</div>
+                    <div class="checklist-item">R - Remember where you are (track location)</div>
+                    <div class="checklist-item">V - Vanquish fear and panic (stay calm)</div>
+                    <div class="checklist-item">I - Improvise (be creative with resources)</div>
+                    <div class="checklist-item">V - Value living (strong will to survive)</div>
+                    <div class="checklist-item">A - Act like the natives (learn from environment)</div>
+                    <div class="checklist-item">L - Learn basic skills (practice before crisis)</div>
+                </div>
+            </div>
+            
+            <div id="urban" class="guide-section">
+                <h2 class="guide-title">Urban & Disaster Survival</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🏙️ Urban Shelter</div>
+                    <div class="item-desc">Avoid damaged buildings after disasters. Seek sturdy structures away from glass. Stairwells safest during earthquakes. Mark building as occupied for rescuers.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">💧 Urban Water Sources</div>
+                    <div class="item-desc">Water heaters hold 40+ gallons (drain from bottom). Toilet tanks (not bowls) contain clean water. Ice cubes, canned goods liquid. Pool water (purify first).</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🔌 Power Alternatives</div>
+                    <div class="item-desc">Car can charge phones with adapter. Solar chargers for small electronics. Hand-crank flashlights/radios. Battery banks pre-charged. Conserve phone battery aggressively.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🚶 Evacuation Routes</div>
+                    <div class="item-desc">Know 3 ways out of your area. Pre-plan rally points. Keep gas tank above half. Go-bag ready by door. Leave early - don't wait for orders.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🏪 Resource Gathering</div>
+                    <div class="item-desc">First 24hrs: water, medications, food. Avoid crowds and conflict. Take only what you need. Document what you take with photos for later reimbursement.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">📡 Communication</div>
+                    <div class="item-desc">Text instead of call - less bandwidth needed. Social media for status updates. Use WiFi when available. Designate out-of-state contact person for family check-ins.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🔥 Urban Fires</div>
+                    <div class="item-desc">Can opener, lighter, paper/cardboard abundant. Cook outdoors only - carbon monoxide kills indoors. Never leave fire unattended in urban setting.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🛡️ Personal Security</div>
+                    <div class="item-desc">Stay aware of surroundings. Travel in groups. Avoid confrontations. Keep supplies hidden. Trust instincts - if feels wrong, leave area.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> Fill bathtubs with water immediately when disaster threatens. Stores 30-60 gallons for washing/flushing. Cover to keep clean. Drain hot water heater for drinking water.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">72-Hour Urban Kit:</div>
+                    <div class="checklist-item">✓ 1 gallon water per person per day (3 days)</div>
+                    <div class="checklist-item">✓ Non-perishable food (3 days, no cooking needed)</div>
+                    <div class="checklist-item">✓ First aid kit with prescription medications</div>
+                    <div class="checklist-item">✓ Flashlight, radio, extra batteries</div>
+                    <div class="checklist-item">✓ Cash (ATMs/cards may not work)</div>
+                    <div class="checklist-item">✓ Important documents in waterproof container</div>
+                    <div class="checklist-item">✓ Phone chargers (wall, car, portable battery)</div>
+                    <div class="checklist-item">✓ Dust masks, plastic sheeting, duct tape</div>
+                    <div class="checklist-item">✓ Local maps (GPS may fail)</div>
+                    <div class="checklist-item">✓ Wrench/pliers for utilities shutoff</div>
+                    <div class="checklist-item">✓ Manual can opener, eating utensils</div>
+                    <div class="checklist-item">✓ Garbage bags, plastic ties, moist towelettes</div>
+                    <div class="checklist-item">✓ Matches/lighter in waterproof container</div>
+                    <div class="checklist-item">✓ Whistle for signaling help</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> After earthquakes: Turn off gas if you smell it, but NEVER turn back on yourself - wait for professionals. Aftershocks can collapse weakened buildings. Stay away from downed power lines.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Home Preparedness Checklist:</div>
+                    <div class="checklist-item">✓ Know how to shut off water, gas, electricity</div>
+                    <div class="checklist-item">✓ Have fire extinguisher on each floor</div>
+                    <div class="checklist-item">✓ Smoke/CO detectors with fresh batteries</div>
+                    <div class="checklist-item">✓ Family communication plan with rally points</div>
+                    <div class="checklist-item">✓ Pet supplies and carriers ready</div>
+                    <div class="checklist-item">✓ Practice evacuation routes quarterly</div>
+                    <div class="checklist-item">✓ Keep important documents backed up digitally</div>
+                    <div class="checklist-item">✓ Maintain vehicle emergency kit year-round</div>
+                </div>
+            </div>
+            
+            <div id="hunting" class="guide-section">
+                <h2 class="guide-title">Hunting & Tracking Skills</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🐾 Track Identification</div>
+                    <div class="item-desc">Fresh tracks have sharp edges, filled tracks are older. Measure stride length, look for claw marks. Deer: heart-shaped, no claws. Canine: oval with claws. Cat: round, no claws, retractable.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🦌 Reading Animal Signs</div>
+                    <div class="item-desc">Scat indicates diet and species. Rubs on trees (deer marking territory). Browse lines show feeding height. Fresh digging means recent activity. Follow trails to water sources.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🎯 Primitive Weapons</div>
+                    <div class="item-desc">Spear: straight sapling, fire-hardened point. Sling: effective 50+ yards with practice. Throwing stick: good for small game. Bow requires weeks of practice - not for beginners in emergency.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🪤 Snare Construction</div>
+                    <div class="item-desc">Wire loop on game trail, 4 fingers wide for rabbits. Anchor securely. Check twice daily. Spring snare lifts animal off ground. Legal only in survival situations. Remove after use.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🐿️ Small Game Hunting</div>
+                    <div class="item-desc">Rabbits, squirrels easier than large game. Hunt dawn/dusk when active. Still-hunt: move slowly, pause frequently. Look for movement, not whole animal. Aim for vital organs.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🔪 Field Dressing</div>
+                    <div class="item-desc">Hang animal head-down. Cut around anus, careful not to puncture intestines. Open belly sternum to pelvis. Remove organs, save heart/liver. Cool meat quickly. Cook thoroughly.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🧂 Meat Preservation</div>
+                    <div class="item-desc">Smoke over fire (not too hot). Salt heavily if available. Slice thin, dry in sun. Pemmican: dried meat powder mixed with fat. Keep flies away during drying process.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> In survival, fishing and trapping more reliable than hunting. Hunting burns calories you may not replace. Set multiple traps, check regularly. One meal not worth days of stalking.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Tracking Fundamentals:</div>
+                    <div class="checklist-item">• Look for tracks near mud, sand, soft ground</div>
+                    <div class="checklist-item">• Morning light shows tracks better (shadows)</div>
+                    <div class="checklist-item">• Follow disturbed vegetation, broken twigs</div>
+                    <div class="checklist-item">• Wider spacing = animal running/scared</div>
+                    <div class="checklist-item">• Deep impressions = heavy animal or soft ground</div>
+                    <div class="checklist-item">• Circle track site to find direction of travel</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Never approach wounded game - extremely dangerous. Cook all wild meat thoroughly to kill parasites. Avoid brain/spinal tissue (disease risk). Wash hands after handling raw meat.
+                </div>
+            </div>
+            
+            <div id="plants" class="guide-section">
+                <h2 class="guide-title">Medicinal Plants & Natural Remedies</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🌿 Plantain (Common)</div>
+                    <div class="item-desc">Leaves treat insect bites, cuts, stings. Chew into poultice, apply to wound. Draw out infection/venom. Grows in lawns, trails. Parallel veins, oval leaves.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🌼 Yarrow</div>
+                    <div class="item-desc">Stops bleeding, antiseptic. Crush leaves into wound. Tea for fever/colds. White/pink flower clusters, feathery leaves. Common in fields, roadsides.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🍃 Willow Bark</div>
+                    <div class="item-desc">Natural aspirin (salicin). Chew inner bark or make tea for pain/fever. Don't use if allergic to aspirin. Found near water. Young bark more potent.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🌺 Pine Tree</div>
+                    <div class="item-desc">Pine needle tea high in Vitamin C (prevents scurvy). Sap is antiseptic, seals wounds. Inner bark edible. Avoid ponderosa pine (toxic to livestock, may harm humans).</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🔥 Aloe Vera</div>
+                    <div class="item-desc">Burn treatment, skin irritation relief. Break leaf, apply clear gel directly. Reduces inflammation, speeds healing. Store broken leaves in cool place for later use.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🌾 Cattail</div>
+                    <div class="item-desc">Gel from base treats burns, wounds. Young shoots edible. Fluff for tinder, insulation. Roots starchy (cook like potato). Found in marshes, pond edges.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🍂 Oak Bark</div>
+                    <div class="item-desc">Tannins are astringent. Tea treats diarrhea, sore throat. Gargle for mouth infections. Boil bark 10 minutes. Don't drink too much (constipation).</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> Positive identification is CRITICAL. One plant family can have edible and deadly species. When uncertain, don't use. Learn 3-5 local medicinal plants thoroughly before emergency.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Natural First Aid Kit:</div>
+                    <div class="checklist-item">• Plantain: bug bites, wounds, stings</div>
+                    <div class="checklist-item">• Yarrow: bleeding, infections, fever</div>
+                    <div class="checklist-item">• Willow bark: pain, inflammation, fever</div>
+                    <div class="checklist-item">• Pine sap: antiseptic, wound sealing</div>
+                    <div class="checklist-item">• Spider webs: bandage (sterile), stops bleeding</div>
+                    <div class="checklist-item">• Mud: cool burns (clean mud only)</div>
+                    <div class="checklist-item">• Charcoal: filter water, treat poisoning</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Many plants have toxic look-alikes. Hemlock looks like wild carrot but is deadly. Never use plants on open wounds without proper ID. Allergic reactions can be severe.
+                </div>
+            </div>
+            
+            <div id="vehicle" class="guide-section">
+                <h2 class="guide-title">Vehicle & Stranded Survival</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🚗 Stay With Vehicle</div>
+                    <div class="item-desc">Vehicle is shelter, visible to rescuers, contains resources. Easier to spot than person. Run engine 10 min/hour for heat (crack window for ventilation). Clear exhaust of snow.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🔋 Battery Conservation</div>
+                    <div class="item-desc">Turn off everything unnecessary. Use hazard lights only when traffic approaches. Interior light drains battery fast. Jump start may not work in extreme cold - keep battery warm.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🎨 Visibility Enhancement</div>
+                    <div class="item-desc">Tie bright fabric to antenna. Spell HELP with rocks/branches. Open hood as distress signal. Write SOS in snow/dirt (large letters). Use mirrors/chrome for signaling.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🔥 Vehicle Heat Sources</div>
+                    <div class="item-desc">Seat covers for insulation. Floor mats block drafts. Stuff newspapers in clothing for warmth. NEVER use candles/heaters inside (carbon monoxide). Huddle together for body heat.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">⛽ Fuel Management</div>
+                    <div class="item-desc">Keep tank above half always. Siphon gas if needed (tube, gravity). Spare container in trunk. Gas stabilizer for long-term storage. In cold, add antifreeze to fuel line.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🛠️ Vehicle Resources</div>
+                    <div class="item-desc">Tire jack for signaling (reflect sun). Seat belt cutters/window breakers. Oil for fire starting. Antifreeze is toxic - never drink. Spare tire rim makes fire ring.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">📱 Communication</div>
+                    <div class="item-desc">Text uses less power than calls. Turn phone off when no signal (searching drains battery). Car charger essential. Keep phone warm (battery dies in cold). Enable location services.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> Vehicle emergency kit: blankets, water, high-energy snacks, first aid, flashlight, jumper cables, shovel, sand/kitty litter (traction), flares, basic tools, duct tape.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Stuck in Snow/Mud Procedure:</div>
+                    <div class="checklist-item">1. Don't spin wheels - digs deeper</div>
+                    <div class="checklist-item">2. Straighten wheels, clear obstacles</div>
+                    <div class="checklist-item">3. Place mats/branches under drive wheels</div>
+                    <div class="checklist-item">4. Rock vehicle gently (forward/reverse)</div>
+                    <div class="checklist-item">5. Deflate tires slightly for more traction</div>
+                    <div class="checklist-item">6. Call for help if unable to free vehicle</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Carbon monoxide kills. NEVER run engine with blocked exhaust. Check tailpipe every 30 minutes in snow. Crack window when engine running. Drowsiness is first symptom - exit immediately.
+                </div>
+            </div>
+            
+            <div id="winter" class="guide-section">
+                <h2 class="guide-title">Cold Weather & Winter Survival</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">❄️ Hypothermia Recognition</div>
+                    <div class="item-desc">Stages: Shivering (mild), confusion/fumbling (moderate), no shivering/unconscious (severe). Rewarm gradually. Give warm drinks if conscious. Never give alcohol. Get to shelter immediately.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🧊 Frostbite Prevention</div>
+                    <div class="item-desc">Cover all skin. White/gray/hard skin is frostbitten. Rewarm gradually in warm water (not hot). Don't rub - causes damage. Fingers, toes, nose, ears most vulnerable. Painful when thawing.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🏔️ Snow Shelters</div>
+                    <div class="item-desc">Quinzhee: pile snow, hollow out after settling 2hrs, 2ft thick walls. Snow cave: dig into drift, small entrance, shelf inside above entrance (cold air sinks). Poke vent hole in roof.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">💧 Winter Hydration</div>
+                    <div class="item-desc">Melt snow before drinking (hypothermia risk eating). Yellow/pink snow unsafe. Dehydration common - cold air is dry. Need same water as summer. Warm drinks reduce heat loss.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🔥 Fire in Snow</div>
+                    <div class="item-desc">Build platform of green logs (prevents sinking). Feather sticks for tinder. Dead standing wood drier than ground wood. Resin-rich wood burns hot. Reflector wall directs heat to shelter.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">⚡ Winter Hazards</div>
+                    <div class="item-desc">Ice: test before crossing, look for dark spots. Avalanche: avoid slopes 30-45°, loud noises can trigger. Tree wells: deep holes around tree bases (suffocation risk). Whiteout: zero visibility.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🎿 Snow Travel</div>
+                    <div class="item-desc">Snowshoes spread weight (prevent sinking). Travel in valleys, avoid ridges (wind). Mark trail every 50ft. Travel during warmest part of day. Rest frequently to avoid sweating.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> "VIP" for layering: Ventilation (prevent sweating), Insulation (trap air), Protection (wind/waterproof). Adjust layers BEFORE sweating - wet clothes deadly in cold.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Cold Weather Priorities:</div>
+                    <div class="checklist-item">1. Find/build shelter immediately (wind chill kills)</div>
+                    <div class="checklist-item">2. Get fire started before dark</div>
+                    <div class="checklist-item">3. Insulate from ground (cold rises from below)</div>
+                    <div class="checklist-item">4. Stay dry at all costs (wet = hypothermia)</div>
+                    <div class="checklist-item">5. Cover head, extremities (major heat loss)</div>
+                    <div class="checklist-item">6. Keep moving but don't sweat</div>
+                    <div class="checklist-item">7. Eat high-fat foods (body fuel for heat)</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Wind chill: -20°F with 20mph wind feels like -48°F. Exposed skin freezes in 10 minutes. Severe hypothermia victim may appear dead but can be revived - keep trying CPR until help arrives.
+                </div>
+            </div>
+            
+            <div id="desert" class="guide-section">
+                <h2 class="guide-title">Desert Survival Strategies</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">☀️ Heat Management</div>
+                    <div class="item-desc">Travel at night/early morning. Rest in shade during peak heat (10am-4pm). Light-colored, loose clothing reflects heat. Cover all skin to prevent sunburn and moisture loss.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">💧 Water Conservation</div>
+                    <div class="item-desc">Breathe through nose (mouth loses moisture). Don't talk unnecessarily. Avoid alcohol/caffeine. Sip, don't gulp. Need 1 gallon per hour in extreme heat. Urine should be light yellow.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🏜️ Desert Water Sources</div>
+                    <div class="item-desc">Follow animal tracks at dawn/dusk. Look in rock crevices after rain. Dig in dry riverbeds (lowest point). Barrel cactus contains moisture (squeeze pulp). Bird flight patterns point to water.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🌵 Desert Shelter</div>
+                    <div class="item-desc">Dig below sand surface (cooler). Use tarp/blanket for shade. Natural caves/overhangs. Stay off ground (heat radiates up). Build shade before searching for water.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🦂 Desert Hazards</div>
+                    <div class="item-desc">Shake out boots/clothes (scorpions, spiders). Never put hands where you can't see. Rattlesnakes in shade under rocks. Flash floods in canyons. Sandstorms: cover mouth/nose, seek shelter.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🔥 Desert Fire</div>
+                    <div class="item-desc">Dead cactus skeleton burns hot. Dried animal dung for fuel. Fire not essential unless cold nights. Smoke visible for miles - good signal. Reflective surface better than fire for daytime signal.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🧭 Desert Navigation</div>
+                    <div class="item-desc">Mark trail with rocks (arrows). Mirages distort distance. Stars reliable at night. Follow dry washes downhill (leads to civilization). Travel along ridges when possible (better view).</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> Desert temperature swings 40°F+ between day/night. Hypothermia risk at night. Layer clothing. Cold desert nights can be as dangerous as hot days.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Desert Survival Priorities:</div>
+                    <div class="checklist-item">1. Find shade immediately - heatstroke kills in hours</div>
+                    <div class="checklist-item">2. Ration sweat, not water - drink when thirsty</div>
+                    <div class="checklist-item">3. Cover skin completely - prevents moisture loss</div>
+                    <div class="checklist-item">4. Rest during heat, travel during cool hours</div>
+                    <div class="checklist-item">5. Signal location - wide open visibility</div>
+                    <div class="checklist-item">6. Watch for weather changes - flash floods deadly</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Heat exhaustion → heat stroke rapid. Symptoms: hot dry skin, confusion, seizures. Cool victim immediately - life threatening. Don't eat without water (digestion uses water). Desert kills through dehydration.
+                </div>
+            </div>
+            
+            <div id="tropical" class="guide-section">
+                <h2 class="guide-title">Jungle & Tropical Survival</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">💧 Water Abundance</div>
+                    <div class="item-desc">Rain collection easiest method. Vines contain water (cut high, then low, catch drip). Bamboo stalks hold water in segments. Always purify - parasites everywhere despite clear appearance.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🦟 Disease Prevention</div>
+                    <div class="item-desc">Mosquitoes carry malaria, dengue. Cover skin at dawn/dusk. Smoke from fire repels insects. Tuck pants into boots (leeches). Check body twice daily for ticks, leeches. Infections spread rapidly in humidity.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🐍 Jungle Hazards</div>
+                    <div class="item-desc">Snakes in trees and ground. Use stick to probe ahead. Avoid tall grass. Centipedes, spiders deadly. Fire ants swarm. Never swim in unknown water (crocodiles, piranha, parasites, electric eel).</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🏕️ Elevated Shelter</div>
+                    <div class="item-desc">Build off ground (floods, insects, animals). Use large leaves for waterproof roof. Bamboo/branches for platform. Steep roof angle for rain runoff. Clear ground below shelter.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🔥 Wet Environment Fire</div>
+                    <div class="item-desc">Standing dead wood drier than ground wood. Bamboo explodes - vent before burning. Rubber/latex from trees burns even wet. Keep tinder dry in waterproof container. Fire platform raises above wet ground.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🌴 Tropical Food</div>
+                    <div class="item-desc">Coconuts: green for water, brown for meat. Banana/plantain always cooked. Palm hearts edible. Avoid bright-colored fruits. Most tropical plants require cooking. Learn local edibles before travel.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🧭 Jungle Navigation</div>
+                    <div class="item-desc">Follow water downstream (leads to civilization). Cut trail markers every 20 feet. Compass essential (dense canopy blocks sun). Mark camp clearly. Easy to get disoriented in dense vegetation.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> Jungle rich in resources but also dangers. Stay dry to prevent fungal infections. Change socks daily. Air out feet. Wet clothes rot skin. Keep wounds clean and covered.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Tropical Environment Challenges:</div>
+                    <div class="checklist-item">• High humidity prevents sweat evaporation</div>
+                    <div class="checklist-item">• Constant moisture rots gear and clothes</div>
+                    <div class="checklist-item">• Dense vegetation makes travel exhausting</div>
+                    <div class="checklist-item">• Insects and diseases prevalent</div>
+                    <div class="checklist-item">• Poor visibility - easy to get lost</div>
+                    <div class="checklist-item">• Flash floods common in rainy season</div>
+                    <div class="checklist-item">• Everything requires more energy in heat/humidity</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Never drink from stagnant water (parasites). Avoid all brightly colored animals (poison). Don't touch unknown plants (skin irritants). Machete essential but dangerous - always cut away from body.
+                </div>
+            </div>
+            
+            <div id="coastal" class="guide-section">
+                <h2 class="guide-title">Coastal & Open Water Survival</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🌊 Ocean Water Danger</div>
+                    <div class="item-desc">NEVER drink seawater - accelerates dehydration, kidney failure. Causes madness and death. Need to desalinate: solar still, distillation. Collect rain water aggressively. Fish body fluids emergency only.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🎣 Ocean Food Sources</div>
+                    <div class="item-desc">Fish near floating debris. Avoid brightly colored fish (toxic). Spear fish in shallows. Seaweed edible (rinse freshwater). Shellfish from rocks (check for red tide). Cook all seafood thoroughly.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">🦈 Marine Hazards</div>
+                    <div class="item-desc">Sharks attracted to blood, splashing. Jellyfish stings (vinegar/urine treatment). Stonefish camouflaged (deadly). Box jellyfish lethal. Sea snakes venomous. Riptides pull you out (swim parallel to shore).</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🏖️ Beach Shelter</div>
+                    <div class="item-desc">Above high tide line (check debris). Natural shade from cliffs, palm trees. Driftwood for structure. Avoid coconut trees directly (falling coconuts deadly). Wind protection essential.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">💨 Weather Awareness</div>
+                    <div class="item-desc">Storms develop quickly over water. Tide cycles (6 hours rise/fall). Storm surge floods low areas. Lightning strikes water. Tsunamis after earthquakes - move to high ground immediately.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🔥 Signal Fire</div>
+                    <div class="item-desc">Beach visible from distance - good for signals. Three fires in triangle. Add green vegetation for smoke. Rubber/oil creates black smoke (daytime). Keep fire going continuously if possible.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">🚤 Raft Survival</div>
+                    <div class="item-desc">Stay with craft unless sinking. Ration water strictly (1 pint/day minimum). Shade from sun (sunburn accelerates dehydration). Collect dew at night. Fish attracted to shade under raft.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> Salt water rots wounds and causes infections. Rinse cuts with fresh water if available. Keep dry when possible. Sun reflection off water intensifies - double sunburn risk.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Coastal Resource Gathering:</div>
+                    <div class="checklist-item">• Low tide exposes tide pools (shellfish, crabs)</div>
+                    <div class="checklist-item">• Seaweed abundant protein/vitamins (rinse well)</div>
+                    <div class="checklist-item">• Birds indicate fish schools offshore</div>
+                    <div class="checklist-item">• Driftwood for fire, shelter construction</div>
+                    <div class="checklist-item">• Beach plastic/debris for containers, tools</div>
+                    <div class="checklist-item">• Sand can filter water (pre-treatment only)</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Hypothermia in water 20x faster than air. 50°F water can kill in 1 hour. Get out of water ASAP. Remove wet clothes, get dry. Never swim at night (disorientation, predators).
+                </div>
+            </div>
+            
+            <div id="mountain" class="guide-section">
+                <h2 class="guide-title">Mountain & High Altitude Survival</h2>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">⛰️ Altitude Sickness</div>
+                    <div class="item-desc">Symptoms above 8,000ft: headache, nausea, fatigue, confusion. Descend immediately if severe. Acclimatize slowly. Drink extra water. High altitude cerebral/pulmonary edema deadly - emergency descent required.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">❄️ Temperature Extremes</div>
+                    <div class="item-desc">Temperature drops 3-5°F per 1,000ft elevation. Windchill severe on exposed ridges. Frostbite risk even above freezing with wind. Layer clothing, protect extremities. Hypothermia kills quickly at altitude.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority high">HIGH</span>
+                    <div class="item-title">☀️ Sun Intensity</div>
+                    <div class="item-desc">UV radiation 10-12% stronger per 3,000ft. Snow reflection doubles exposure (snow blindness). Severe sunburn in hours. Cover all skin. Sunglasses essential. Lips crack and bleed - use lip balm.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🪨 Terrain Hazards</div>
+                    <div class="item-desc">Loose rocks, scree slopes. Test footing before weight transfer. Avalanche danger on slopes 30-45°. Rock falls common. Stay away from cliff edges. Lightning strikes peaks - descend during storms.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">💧 Mountain Water</div>
+                    <div class="item-desc">Streams above tree line usually clean but purify anyway. Melt snow for water (energy intensive). Dehydration common in dry air. Drink before thirsty. Need extra at altitude (breathing moisture loss).</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority medium">MEDIUM</span>
+                    <div class="item-title">🏔️ Mountain Shelter</div>
+                    <div class="item-desc">Seek wind protection (rocks, trees). Below tree line safer than exposed ridge. Cave/overhang ideal. Insulate from ground. Build windbreak with rocks/snow. Small shelter retains heat better.</div>
+                </div>
+                
+                <div class="item">
+                    <span class="priority low">LOW</span>
+                    <div class="item-title">⬇️ Safe Descent</div>
+                    <div class="item-desc">Stay on ridges when possible (visible). Follow water downhill. Avoid steep descents (injury risk). Three points of contact on rough terrain. Descending conserves energy versus climbing.</div>
+                </div>
+                
+                <div class="tip">
+                    <span class="tip-icon">💡 TIP:</span> "Climb high, sleep low" - acclimatize by day, descend to sleep. Weather changes rapidly in mountains. Storm can hit in minutes. Always have escape route planned.
+                </div>
+                
+                <div class="checklist">
+                    <div style="font-weight:bold; color:#76ff03; margin-bottom:1%;">Mountain Environment Factors:</div>
+                    <div class="checklist-item">• Thinner air = less oxygen (fatigue, poor decisions)</div>
+                    <div class="checklist-item">• Faster dehydration in dry mountain air</div>
+                    <div class="checklist-item">• Weather unpredictable - prepare for worst</div>
+                    <div class="checklist-item">• Longer recovery time from exertion at altitude</div>
+                    <div class="checklist-item">• Fire difficult - less oxygen for combustion</div>
+                    <div class="checklist-item">• Sound travels differently - distance deceptive</div>
+                    <div class="checklist-item">• Cooking takes longer (lower boiling point)</div>
+                </div>
+                
+                <div class="warning">
+                    <span class="warning-icon">⚠️ WARNING:</span> Never continue up with altitude sickness symptoms - only cure is descent. HACE/HAPE can kill in 12-24 hours. Most mountain deaths from poor decisions caused by hypoxia (oxygen deprivation affecting judgment).
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: rgba(0, 0, 0, 0.5); border: 2px solid #4caf50; border-radius: 8px; padding: 2%; margin-top: 1%;">
+            <h3 style="color: #76ff03; font-size: 0.9em; margin-bottom: 1%;">📚 Quick Reference - Survival Priorities</h3>
+            <div style="font-size: 0.75em; color: #c8e6c9; line-height: 1.8;">
+                <div style="padding: 1%; background: rgba(255,255,255,0.05); margin-bottom: 1%; border-radius: 4px;">
+                    <strong style="color: #a5d6a7;">First 10 Minutes:</strong> Stop, assess injuries, find immediate shelter from danger, establish security
+                </div>
+                <div style="padding: 1%; background: rgba(255,255,255,0.05); margin-bottom: 1%; border-radius: 4px;">
+                    <strong style="color: #a5d6a7;">First Hour:</strong> Administer first aid, build/find shelter, signal location, take inventory of supplies
+                </div>
+                <div style="padding: 1%; background: rgba(255,255,255,0.05); margin-bottom: 1%; border-radius: 4px;">
+                    <strong style="color: #a5d6a7;">First Day:</strong> Secure water source, establish fire, create signals, ration food, plan next steps
+                </div>
+                <div style="padding: 1%; background: rgba(255,255,255,0.05); margin-bottom: 1%; border-radius: 4px;">
+                    <strong style="color: #a5d6a7;">Ongoing:</strong> Maintain morale, improve shelter, gather resources, stay hydrated, remain visible for rescue
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: rgba(0, 0, 0, 0.5); border: 2px solid #ff9800; border-radius: 8px; padding: 2%; margin-top: 1%;">
+            <h3 style="color: #ffa726; font-size: 0.9em; margin-bottom: 1%;">⚖️ Pack Weight Guidelines</h3>
+            <div style="font-size: 0.7em; color: #ffe0b2; line-height: 1.8;">
+                <div style="padding: 1%; margin-bottom: 1%;">
+                    <strong style="color: #ffb74d;">Base Weight:</strong> Pack without food/water should be 15-20% of body weight max
+                </div>
+                <div style="padding: 1%; margin-bottom: 1%;">
+                    <strong style="color: #ffb74d;">Light Load:</strong> 20-30 lbs ideal for day trips
+                </div>
+                <div style="padding: 1%; margin-bottom: 1%;">
+                    <strong style="color: #ffb74d;">Medium Load:</strong> 30-45 lbs for weekend trips
+                </div>
+                <div style="padding: 1%; margin-bottom: 1%;">
+                    <strong style="color: #ffb74d;">Heavy Load:</strong> 45-60 lbs absolute maximum
+                </div>
+                <div style="padding: 1%; margin-bottom: 1%;">
+                    <strong style="color: #ffb74d;">Tip:</strong> Pack heaviest items close to back, mid-height
+                </div>
+                <div style="padding: 1%;">
+                    <strong style="color: #ffb74d;">Rule:</strong> Every ounce counts - question every item
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: rgba(0, 0, 0, 0.5); border: 2px solid #2196f3; border-radius: 8px; padding: 2%; margin-top: 1%;">
+            <h3 style="color: #42a5f5; font-size: 0.9em; margin-bottom: 1%;">🌍 Climate-Specific Quick Tips</h3>
+            <div style="font-size: 0.7em; color: #bbdefb; line-height: 1.8;">
+                <div style="padding: 1%; background: rgba(255,255,255,0.05); margin-bottom: 1%; border-radius: 4px;">
+                    <strong style="color: #64b5f6;">Desert:</strong> Travel at night, rest in shade, cover all skin, find water first
+                </div>
+                <div style="padding: 1%; background: rgba(255,255,255,0.05); margin-bottom: 1%; border-radius: 4px;">
+                    <strong style="color: #64b5f6;">Winter:</strong> Stay dry, layer clothing, build shelter fast, watch for hypothermia signs
+                </div>
+                <div style="padding: 1%; background: rgba(255,255,255,0.05); margin-bottom: 1%; border-radius: 4px;">
+                    <strong style="color: #64b5f6;">Jungle:</strong> Elevate shelter, purify water always, protect from insects, follow water downstream
+                </div>
+                <div style="padding: 1%; background: rgba(255,255,255,0.05); margin-bottom: 1%; border-radius: 4px;">
+                    <strong style="color: #64b5f6;">Mountain:</strong> Descend if altitude sick, watch weather, protect from UV, acclimatize slowly
+                </div>
+                <div style="padding: 1%; background: rgba(255,255,255,0.05); border-radius: 4px;">
+                    <strong style="color: #64b5f6;">Coastal:</strong> Never drink seawater, avoid marine hazards, signal with fire, fish for food
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: rgba(255, 193, 7, 0.1); border: 2px solid #ffc107; border-radius: 8px; padding: 2%; margin-top: 1%;">
+            <h3 style="color: #ffc107; font-size: 0.9em; margin-bottom: 1%;">⚡ Critical Numbers to Memorize</h3>
+            <div style="font-size: 0.7em; color: #fff3cd; line-height: 1.8;">
+                <div style="margin-bottom: 1%;">🌡️ <strong>Hypothermia:</strong> Core temp below 95°F / 35°C</div>
+                <div style="margin-bottom: 1%;">💧 <strong>Water:</strong> Need 1 gallon/day per person</div>
+                <div style="margin-bottom: 1%;">🔥 <strong>Boiling:</strong> 1 min at sea level, 3 min above 6,500ft</div>
+                <div style="margin-bottom: 1%;">🚶 <strong>Walking:</strong> Average 2-3 mph in wilderness</div>
+                <div style="margin-bottom: 1%;">📏 <strong>Shelter:</strong> 12ft minimum from fire for safety</div>
+                <div style="margin-bottom: 1%;">📞 <strong>Emergency:</strong> 911 (US), 112 (International GSM)</div>
+                <div style="margin-bottom: 1%;">🎯 <strong>Signal:</strong> 3 of anything = universal distress</div>
+                <div style="margin-bottom: 1%;">🧊 <strong>Frostbite:</strong> Skin white/hard, rewarm gradually</div>
+                <div style="margin-bottom: 1%;">🔥 <strong>Fire Clearance:</strong> Clear 10ft radius minimum</div>
+                <div style="margin-bottom: 1%;">⏰ <strong>Shelter Priority:</strong> Build before nightfall</div>
+                <div style="margin-bottom: 1%;">🐻 <strong>Food Storage:</strong> Hang 12ft high, 6ft from tree trunk</div>
+                <div style="margin-bottom: 1%;">💊 <strong>Shock Position:</strong> Lie flat, elevate legs 12 inches</div>
+                <div style="margin-bottom: 1%;">🌊 <strong>Water Loss:</strong> Body loses 2-3 liters daily through breathing/sweating</div>
+                <div style="margin-bottom: 1%;">❄️ <strong>Wind Chill:</strong> Doubles heat loss with wind speed</div>
+                <div>☀️ <strong>Sun Protection:</strong> UV burns in 15 min without protection</div>
+            </div>
+        </div>
+        
+        <div style="background: rgba(156, 39, 176, 0.1); border: 2px solid #ab47bc; border-radius: 8px; padding: 2%; margin-top: 1%;">
+            <h3 style="color: #ba68c8; font-size: 0.9em; margin-bottom: 1%;">🎯 Common Survival Mistakes to Avoid</h3>
+            <div style="font-size: 0.7em; color: #e1bee7; line-height: 1.8;">
+                <div style="padding: 1%; margin-bottom: 1%;">✗ Panicking and making rash decisions without thinking</div>
+                <div style="padding: 1%; margin-bottom: 1%;">✗ Leaving designated area when lost (stay put!)</div>
+                <div style="padding: 1%; margin-bottom: 1%;">✗ Not telling anyone your trip plans/expected return</div>
+                <div style="padding: 1%; margin-bottom: 1%;">✗ Eating unknown plants without proper testing</div>
+                <div style="padding: 1%; margin-bottom: 1%;">✗ Building shelter after dark (do it before sunset)</div>
+                <div style="padding: 1%; margin-bottom: 1%;">✗ Drinking untreated water (even if clear)</div>
+                <div style="padding: 1%; margin-bottom: 1%;">✗ Wearing cotton in cold/wet conditions</div>
+                <div style="padding: 1%; margin-bottom: 1%;">✗ Not protecting yourself from sun/wind/cold</div>
+                <div style="padding: 1%; margin-bottom: 1%;">✗ Wasting energy on unnecessary tasks</div>
+                <div style="padding: 1%; margin-bottom: 1%;">✗ Ignoring early warning signs (hypothermia, dehydration)</div>
+                <div style="padding: 1%; margin-bottom: 1%;">✗ Traveling at night in unfamiliar terrain</div>
+                <div style="padding: 1%;">✗ Giving up mentally before physical limits reached</div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; padding: 2%; margin-top: 1%; color: #66bb6a; font-size: 0.7em;">
+            <div style="margin-bottom: 1%;">🎒 Stay Prepared • Stay Calm • Stay Alive 🎒</div>
+            <div style="color: #81c784;">Knowledge + Preparation = Survival</div>
+            <div style="margin-top: 1%; color: #a5d6a7; font-size: 0.9em;">Practice skills before emergency • Share knowledge with others • Update supplies regularly</div>
+        </div>
+        
+        <div style="background: rgba(33, 150, 243, 0.1); border: 2px solid #42a5f5; border-radius: 8px; padding: 2%; margin-top: 1%;">
+            <h3 style="color: #42a5f5; font-size: 0.9em; margin-bottom: 1%; text-align: center;">🏆 Survival Success Stories - Learn From Others</h3>
+            <div style="font-size: 0.7em; color: #bbdefb; line-height: 1.8;">
+                <div style="padding: 1%; background: rgba(255,255,255,0.05); margin-bottom: 1%; border-radius: 4px;">
+                    <strong style="color: #64b5f6;">Key Factor #1:</strong> Preparation - Survivors had basic knowledge and some gear
+                </div>
+                <div style="padding: 1%; background: rgba(255,255,255,0.05); margin-bottom: 1%; border-radius: 4px;">
+                    <strong style="color: #64b5f6;">Key Factor #2:</strong> Mental Attitude - Positive mindset and will to live paramount
+                </div>
+                <div style="padding: 1%; background: rgba(255,255,255,0.05); margin-bottom: 1%; border-radius: 4px;">
+                    <strong style="color: #64b5f6;">Key Factor #3:</strong> Priorities - Shelter and water before food or rescue attempt
+                </div>
+                <div style="padding: 1%; background: rgba(255,255,255,0.05); margin-bottom: 1%; border-radius: 4px;">
+                    <strong style="color: #64b5f6;">Key Factor #4:</strong> Resourcefulness - Used available materials creatively
+                </div>
+                <div style="padding: 1%; background: rgba(255,255,255,0.05); border-radius: 4px;">
+                    <strong style="color: #64b5f6;">Key Factor #5:</strong> Patience - Stayed calm, didn't waste energy, waited for rescue
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: rgba(0, 0, 0, 0.5); border: 2px solid #66bb6a; border-radius: 8px; padding: 2%; margin-top: 1%;">
+            <h3 style="color: #76ff03; font-size: 0.9em; margin-bottom: 1%; text-align: center;">📝 Final Survival Reminders</h3>
+            <div style="font-size: 0.7em; color: #c8e6c9; line-height: 1.8;">
+                <div style="padding: 1%; margin-bottom: 1%;">• <strong>Before Any Trip:</strong> Tell someone your plans, expected return, emergency contacts</div>
+                <div style="padding: 1%; margin-bottom: 1%;">• <strong>Rule of 3s:</strong> 3 min without air, 3 hrs without shelter (harsh), 3 days without water, 3 weeks without food</div>
+                <div style="padding: 1%; margin-bottom: 1%;">• <strong>Priority Order:</strong> Safety → Shelter → Water → Fire → Food → Rescue</div>
+                <div style="padding: 1%; margin-bottom: 1%;">• <strong>If Lost:</strong> STOP (Sit, Think, Observe, Plan) - Stay put, make yourself visible</div>
+                <div style="padding: 1%; margin-bottom: 1%;">• <strong>Positive Attitude:</strong> 90% of survival is mental - maintain hope and keep busy</div>
+                <div style="padding: 1%; margin-bottom: 1%;">• <strong>Train Before Emergency:</strong> Skills learned under stress aren't reliable - practice now</div>
+                <div style="padding: 1%; margin-bottom: 1%;">• <strong>Two is One, One is None:</strong> Always have backup for critical items</div>
+                <div style="padding: 1%;">• <strong>Most Important:</strong> Your will to survive is the ultimate survival tool</div>
+            </div>
+        </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function showGuide(id) {
+            const sections = document.querySelectorAll('.guide-section');
+            const buttons = document.querySelectorAll('.category-btn');
+            
+            sections.forEach(section => section.classList.remove('active'));
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(id).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
